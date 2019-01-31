@@ -61,9 +61,11 @@ app.post('/api/add_message', function (req, res) {
 app.put('/api/toggle_message_status', function (req, res) {
   const id = req.body.id;
 
+  var currStatus = false;
   for (var i = 0; i < todoList.length; i++) {
     if (todoList[i].id == id){
       todoList[i].status = !todoList[i].status;
+      currStatus = todoList[i].status;
       break;
     }
   }
@@ -72,7 +74,7 @@ app.put('/api/toggle_message_status', function (req, res) {
   console.log(todoList);
   console.log('\n');
 
-  res.json({ code: 0, message: '切换TODO状态成功' });
+  res.json({ code: 0, status: currStatus, message: '切换TODO状态成功' });
 });
 
 
